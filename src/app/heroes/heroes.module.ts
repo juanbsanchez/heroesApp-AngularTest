@@ -6,6 +6,7 @@ import { HeroeComponent } from './pages/heroe/heroe.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from './pages/list/list.component';
 import {HeroesRoutingModule} from "./heroes-routing.module";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 
 
@@ -19,7 +20,8 @@ import {HeroesRoutingModule} from "./heroes-routing.module";
   ],
   imports: [
     CommonModule,
-    HeroesRoutingModule
+    HeroesRoutingModule,
+    FlexLayoutModule
   ]
 })
 export class HeroesModule { }
