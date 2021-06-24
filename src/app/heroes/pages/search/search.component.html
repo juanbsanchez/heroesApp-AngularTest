@@ -35,6 +35,9 @@
   <div>
     <pre>{{ heroeSelected | json }}</pre>
   </div>
+  <div *ngIf="heroeSelected">
+    <app-heroe-card [heroe]="heroeSelected"></app-heroe-card>
+  </div>
 </div>
 
 
