@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Heroe, Publisher} from "../../interfaces/heroes.interface";
+import {HeroesService} from "../../services/heroes.service";
 
 @Component({
   selector: 'app-add',
@@ -29,9 +30,20 @@ export class AddComponent implements OnInit {
     alt_img: ''
   }
 
-  constructor() { }
+  constructor(private heroesService: HeroesService) { }
 
   ngOnInit(): void {
+  }
+
+  save(){
+
+    if(this.heroe.superhero.trim().length === 0){
+      return;
+    }
+
+    this.heroesService.addHeroe(this.heroe)
+      .subscribe(resp => console.log('response', resp))
+
   }
 
 }
