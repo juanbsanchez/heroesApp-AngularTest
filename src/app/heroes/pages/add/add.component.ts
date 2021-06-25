@@ -44,7 +44,7 @@ export class AddComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    
+
     if(!this.router.url.includes('edit')){
       return;
     }
@@ -74,6 +74,13 @@ export class AddComponent implements OnInit {
         });
     }
 
+  }
+
+  delete(){
+    this.heroesService.deleteHeroe(this.heroe.id!)
+      .subscribe(resp => {
+        this.router.navigate(['/heroes']);
+      })
   }
 
 }

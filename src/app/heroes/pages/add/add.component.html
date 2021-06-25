@@ -53,12 +53,27 @@
              required>
     </mat-form-field>
     <br/>
-    <button
+
+    <div fxLayout>
+
+      <button
       mat-raised-button color="primary"
       (click)="save()">
       <mat-icon>edit</mat-icon>
       Save
     </button>
+
+    <span class="spacer"></span>
+
+      <button
+        *ngIf="heroe.id"
+        (click)="delete()"
+        mat-raised-button color="warn">
+        <mat-icon>remove</mat-icon>
+        Delete
+      </button>
+    </div>
+
   </div>
   <div fxFlex="50">
     <img [src]="heroe | imagen">
