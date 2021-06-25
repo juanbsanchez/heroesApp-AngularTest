@@ -15,9 +15,9 @@ export class LoginComponent {
   login(){
     this.authService.login()
       .subscribe(resp => {
-
+        this._router.navigate(['/heroes']);
       })
-    /*this._router.navigate(['/heroes']);*/
+
   }
 
 
