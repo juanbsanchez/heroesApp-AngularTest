@@ -84,15 +84,21 @@ export class AddComponent implements OnInit {
 
   delete(){
 
-    this._dialog.open(ConfirmComponent, {
-      width: '250px'
-    })
+    const dialog = this._dialog.open(ConfirmComponent, {
+      width: '250px',
+      data: {...this.heroe} // use this if there could be any modification in object
+    });
 
-    /*
-    this.heroesService.deleteHeroe(this.heroe.id!)
-      .subscribe(resp => {
-        this.router.navigate(['/heroes']);
-      })*/
+    dialog.afterClosed()
+      .subscribe(
+        (result) => {
+          if(result){
+            this._heroesService.deleteHeroe(this.heroe.id!)
+              .subscribe(resp => {
+                this._router.navigate(['/heroes']);
+              })
+          }
+        })
   }
 
   showSnackbar(message: string): void{
