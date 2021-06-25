@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Heroe, Publisher} from "../../interfaces/heroes.interface";
 
 @Component({
   selector: 'app-add',
@@ -7,6 +8,26 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class AddComponent implements OnInit {
+
+  publishers = [
+    {
+      id: 'DC Comics',
+      desc: 'DC Comics desc'
+    },
+    {
+      id: 'Marvel Comics',
+      desc: 'Marvel Comics desc'
+    }
+  ]
+
+  heroe: Heroe = {
+    superhero: '',
+    alter_ego: '',
+    characters: '',
+    first_appearance: '',
+    publisher: Publisher.DCComics,
+    alt_img: ''
+  }
 
   constructor() { }
 
