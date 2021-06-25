@@ -8,6 +8,12 @@ import {switchMap} from "rxjs/operators";
   selector: 'app-add',
   templateUrl: './add.component.html',
   styles: [
+    `
+    img{
+      width: 100%;
+      border-radius: 5px;
+    }
+    `
   ]
 })
 export class AddComponent implements OnInit {
@@ -38,6 +44,11 @@ export class AddComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    
+    if(!this.router.url.includes('edit')){
+      return;
+    }
+
     this.activatedRoute.params
       .pipe(
         switchMap(({id}) => this.heroesService.getHeroebyId(id))
