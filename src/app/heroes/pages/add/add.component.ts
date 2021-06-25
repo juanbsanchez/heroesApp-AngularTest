@@ -4,6 +4,8 @@ import {HeroesService} from "../../services/heroes.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from "rxjs/operators";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmComponent} from "../../components/confirm/confirm.component";
 
 @Component({
   selector: 'app-add',
@@ -40,20 +42,21 @@ export class AddComponent implements OnInit {
   }
 
   constructor(
-    private heroesService: HeroesService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private _snackBar: MatSnackBar) { }
+    private _heroesService: HeroesService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router,
+    private _snackBar: MatSnackBar,
+    private _dialog: MatDialog) { }
 
   ngOnInit(): void {
 
-    if(!this.router.url.includes('edit')){
+    if(!this._router.url.includes('edit')){
       return;
     }
 
-    this.activatedRoute.params
+    this._activatedRoute.params
       .pipe(
-        switchMap(({id}) => this.heroesService.getHeroebyId(id))
+        switchMap(({id}) => this._heroesService.getHeroebyId(id))
       )
       .subscribe((heroe) => this.heroe = heroe)
   }
@@ -66,13 +69,13 @@ export class AddComponent implements OnInit {
 
     if(this.heroe.id){
       //update
-      this.heroesService.updateHeroe(this.heroe)
+      this._heroesService.updateHeroe(this.heroe)
         .subscribe(resp => this.showSnackbar('Heroe Updated'));
     }else{
       //create
-      this.heroesService.addHeroe(this.heroe)
+      this._heroesService.addHeroe(this.heroe)
         .subscribe(heroe => {
-          this.router.navigate(['/heroes/edit', heroe.id])
+          this._router.navigate(['/heroes/edit', heroe.id])
           this.showSnackbar('Heroe Created')
         });
     }
@@ -80,10 +83,16 @@ export class AddComponent implements OnInit {
   }
 
   delete(){
+
+    this._dialog.open(ConfirmComponent, {
+      width: '250px'
+    })
+
+    /*
     this.heroesService.deleteHeroe(this.heroe.id!)
       .subscribe(resp => {
         this.router.navigate(['/heroes']);
-      })
+      })*/
   }
 
   showSnackbar(message: string): void{
