@@ -21,6 +21,8 @@ export class AuthService {
   login(){
     return this._http.get<Auth>(`${this._baseUrl}/usuarios/1`)
       .pipe(
-        tap(auth => this._auth = auth));
+        tap(auth => this._auth = auth),
+        tap(auth => localStorage.setItem('id', auth.id))
+      );
   }
 }
