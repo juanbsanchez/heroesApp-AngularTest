@@ -6,16 +6,22 @@ import {AuthService} from "../services/auth.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanLoad {
+export class AuthGuard implements CanLoad, CanActivate {
 
   constructor(private _authService: AuthService) {
   }
 
- /* canActivate(
+  canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }*/
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+
+    if(this._authService.auth.id){
+      return true;
+    }
+
+    return false;
+
+  }
 
   canLoad(
     route: Route,
